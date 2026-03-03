@@ -1,7 +1,6 @@
 ==
 <section class="featured-properties-area section-padding-100-50">
   <div class="container">
-
     <div class="row">
       <div class="col-12">
         <div class="section-heading wow fadeInUp">
@@ -9,16 +8,14 @@
         </div>
       </div>
     </div>
-
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
         {% for propiedad in propiedades %}
           <div class="swiper-slide">
-            <a href="{{ propiedad.slug }}" class="d-block text-dark text-decoration-none">
-            
+            <a href="/property/{{ propiedad.slug }}" class="d-block text-dark text-decoration-none" aria-label="Ver {{ propiedad.titulo }}">
               <!-- slide -->
-               <div class="">
-                   <div class="property-box" onclick="window.location.href='https://akivinta.mx/property/{{ propiedad.slug }}'" style="cursor: pointer;">
+                 <div class="">
+                   <div class="property-box" onclick="window.location.href='{{ 'property/' ~ propiedad.slug }}'" style="cursor: pointer;">
                     <div class="property-thumbnail">
                       <a href="{{ propiedad.slug }}" class="property-img">
                         <div class="listing-badges">
@@ -27,44 +24,36 @@
                             <span class="listing-time">{{ propiedad.estado }}</span>
                           {% endif %}
                         </div>
-                
                         {% if propiedad.precio > 0 %}
                           <div class="price-box">
                             ${{ propiedad.precio }}<small>/{{ propiedad.moneda }}</small>
                           </div>
                         {% endif %}
-                
-                        <img class="d-block w-100" src="{{ propiedad.portada.path }}" alt="properties">
+                        <img class="d-block w-100" src="{{ propiedad.portada.path }}" srcset="{{ propiedad.portada.path }} 800w, {{ propiedad.portada.path }} 400w" sizes="(max-width: 600px) 100vw, 33vw" alt="{{ propiedad.titulo|escape }}" loading="lazy" decoding="async">
                       </a>
                     </div>
-                
                     <div class="detail">
                       <div class="property-content">
-                        <h1 class="title">
-                          <a href="{{ 'property/' ~ propiedad.slug }}">{{ propiedad.titulo }}</a>
-                        </h1>
-                          <h1 class="title">
-                            <a href="/property/{{ propiedad.slug }}">{{ propiedad.nombre }}</a>
-                          </h1>
-                
+                        <h2 class="title">
+                          <a href="/property/{{ propiedad.slug }}">{{ propiedad.titulo }}</a>
+                        </h2>
+                        <h3 class="title">
+                          <a href="/property/{{ propiedad.slug }}">{{ propiedad.nombre }}</a>
+                        </h3>
                         <p class="location">
                           <i class="fa-solid fa-location-dot"></i>
                           {{ propiedad.direccion }}
                         </p>
-                
                         <div class="property-meta-data d-flex align-items-end justify-content-between">
                           <div class="new-tag">
                              <i class="fa-solid fa-people-roof"></i> {{ propiedad.habitaciones }}
                           </div>
-                
                           <div class="bathroom">
                              <i class="fa-solid fa-bath"></i> {{ propiedad.banos }}
                           </div>
-                
                           <div class="garage">
                             <i class="fa fa-car"></i> {{ propiedad.cajones_estacionamiento }}
                           </div>
-                
                           <div class="space">
                             <i class="fa-solid fa-vector-square"></i>
                             <span>{{ propiedad.m2_terreno }} m²</span>
@@ -80,7 +69,6 @@
                                               <a style="color: white;"><i class="flaticon-time"></i> VER DETALLE </a>
                                             </div>
                                             </div>
-                
                     <div class="footer clearfix">
                       <div class="pull-left days" style="display: none;">
                         <a><i class="fa fa-user" aria-hidden="true"></i> {{ propiedad.agente.nombre|default('') }}</a>
@@ -91,16 +79,30 @@
                     </div>
                   </div>
                 </div>
-
-              
             </a>
           </div>
         {% endfor %}
       </div>
-
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-pagination"></div>
     </div>
   </div>
 </section>
+  <!-- JSON-LD ItemList for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for propiedad in propiedades %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "url": "{{ '/' ~ 'property/' ~ propiedad.slug }}",
+        "name": "{{ propiedad.titulo|escape }}"
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>

@@ -7,7 +7,6 @@ noRecordsMessage = "No records found"
 detailsPage = "-"
 detailsUrlParameter = "id"
 pageNumber = "{{ :page }}"
-
 [builderList categoriaListas]
 modelClass = "Devapps\RealState\Models\Categoria"
 scope = "-"
@@ -18,29 +17,10 @@ detailsPage = "-"
 detailsUrlParameter = "id"
 pageNumber = "{{ :page }}"
 ==
-<style>
-@media (min-width: 576px) {
-    .classy-navbar a img {
-        max-width: 108px;
-    }
-}
-.classy-navbar a img {
-    display: block;
-    width: 100%;
-    max-width: 140px;
-    height: auto;
-    margin: 0 auto;
-    padding: 0;
-}
-</style>
-
 {% set ciudades = ciudadesListas.records %}
 {% set categorias = categoriaListas.records %}
-
-
 <!-- ##### Header Area Start ##### -->
     <header class="header-area">
-
         <!-- Top Header Area -->
         <!--div class="top-header-area">
             <div class="h-100 d-md-flex justify-content-between align-items-center">
@@ -57,29 +37,23 @@ pageNumber = "{{ :page }}"
                 </div>
             </div>
         </div-->
-
         <!-- Main Header Area -->
         <div class="main-header-area" id="stickyHeader">
             <div class="classy-nav-container breakpoint-off">
                 <!-- Classy Menu -->
                 <nav class="classy-navbar justify-content-between" id="southNav">
-
                     <!-- Logo -->
                     <a class="nav-brand" href="/"><img src="{{'assets/img/core-img/logo-white.png'| theme}}" alt=""></a>
-
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
                         <span class="navbarToggler"><span></span><span></span><span></span></span>
                     </div>
-
                     <!-- Menu -->
                     <div class="classy-menu">
-
                         <!-- close btn -->
                         <div class="classycloseIcon">
                             <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                         </div>
-
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
@@ -87,7 +61,7 @@ pageNumber = "{{ :page }}"
                                     <ul class="dropdown">
                                         {% for categoria in categorias %}
                                             <li>
-                                                <a href="https://akivinta.mx/busqueda?categoria_id={{ categoria.id }}">
+                                                <a href="/busqueda?categoria_id={{ categoria.id }}">
                                                     {{ categoria.categoria }}
                                                 </a>
                                             </li>
@@ -98,47 +72,17 @@ pageNumber = "{{ :page }}"
                                     <ul class="dropdown">
                                         {% for ciudad in ciudades %}
                                             <li>
-                                                <a href="https://akivinta.mx/busqueda?ciudad_id={{ ciudad.id }}">
+                                                <a href="/busqueda?ciudad_id={{ ciudad.id }}">
                                                     {{ ciudad.ciudad }}
                                                 </a>
                                             </li>
                                         {% endfor %}
-                                    </ul>
-                                </li>
-                                <li><a href="#">Nosotros</a></li>
-                                <li><a href="#">Conocenos</a></li>
-                                <li><a href="#">Contacto</a></li>
-                            </ul>
-
-                            <!-- Search Form -->
-                            <div class="south-search-form">
-                                <form action="/busqueda" method="get">
-                                    <input type="text" name="nombre" id="buscar_general" autocomplete="off" placeholder="BUSCA POR ZONA O TIPO DE INMUEBLE Y PRESIONA 'ENTER' PARA BUSCAR ..." style="width: 100%;" />
-                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-
-                            <!-- Search Button -->
-                            <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
-                        </div>
-                        <!-- Nav End -->
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
-    
-<style>
-
-.dark .classynav ul li .dropdown,
 .dark.classy-nav-container,
 .dark .classynav ul li .megamenu,
 .dark.breakpoint-on .classynav > ul > li > a,
 .dark.breakpoint-on .classy-navbar .classy-menu {
   background-color: #31364180;
 }
-
 .dark.scrolled .classynav ul li .dropdown,
 .dark.scrolled.classy-nav-container,
 .dark.scrolled .classynav ul li .megamenu,
@@ -146,27 +90,11 @@ pageNumber = "{{ :page }}"
 .dark.scrolled.breakpoint-on .classy-navbar .classy-menu {
   background-color: #09344a;
 }
-
 .breakpoint-off .classynav ul li:hover .dropdown {
     opacity: 1;
     visibility: visible;
     top: 178%;
 }
-
 </style>
-
 <script>
-window.addEventListener('scroll', function() {
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
-  const darkElement = document.querySelector('.dark');
-
-  if (!darkElement) return;
-
-  if (scrollTop > 10) {
-    darkElement.classList.add('scrolled');
-  } else {
-    darkElement.classList.remove('scrolled');
-  }
-});
-
-</script>
+<!-- Header styles and scroll behavior moved to assets/css/custom.css and assets/js/custom.js -->

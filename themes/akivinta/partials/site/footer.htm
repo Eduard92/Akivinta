@@ -4,13 +4,9 @@ identifierValue = 1
 modelKeyColumn = "id"
 displayColumn = "nombre"
 notFoundMessage = "Record not found"
-
 [EmpresaData]
 ==
 {% set empresa = EmpresaRecord.record %}
-
-
-
 <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area section-padding-50-0 bg-img gradient-background-overlay">
         <!-- Main Footer Area -->
@@ -21,13 +17,12 @@ notFoundMessage = "Record not found"
                     <div class="col-12 col-sm-2 col-xl-3">
                         <div class="footer-widget-area mb-100">
                             <!-- Widget Title -->
-                            <img src="img/bg-img/footer.jpg" alt="">
+                            <img src="{{ 'assets/img/bg-img/footer.jpg'|theme }}" alt="Footer background">
                             <div class="footer-logo my-4">
                                     <img src="{{'assets/img/core-img/logo-white.png'| theme}}" alt="Logo" style="max-width:200px!important">
                             </div>
                         </div>
                     </div>
-                    
                     <!-- Single Footer Widget -->
                     <div class="col-12 col-sm-8 col-xl-6">
                         <div class="footer-widget-area mb-100">
@@ -35,11 +30,9 @@ notFoundMessage = "Record not found"
                             <!--div class="widget-title">
                                 <h6>About Us</h6>
                             </div-->
-
                             {{empresa.footer | raw}}
                         </div>
                     </div>
-
                     <!-- Single Footer Widget -->
                     <div class="col-12 col-sm-2 col-xl-3">
                         <div class="footer-widget-area mb-100">
@@ -57,13 +50,12 @@ notFoundMessage = "Record not found"
                             </div>
                             <!-- Address -->
                             <div class="address">
-                                <h6><img src="img/icons/phone-call.png" alt=""> +45 677 8993000 223</h6>
-                                <h6><img src="img/icons/envelope.png" alt=""> office@template.com</h6>
-                                <h6><img src="img/icons/location.png" alt=""> Main Str. no 45-46, b3, 56832, Los Angeles, CA</h6>
+                                <h6><img src="{{ 'assets/img/icons/phone-call.png'|theme }}" alt="Phone"> +45 677 8993000 223</h6>
+                                <h6><img src="{{ 'assets/img/icons/envelope.png'|theme }}" alt="Email"> office@template.com</h6>
+                                <h6><img src="{{ 'assets/img/icons/location.png'|theme }}" alt="Location"> Main Str. no 45-46, b3, 56832, Los Angeles, CA</h6>
                             </div>
                         </div>
                     </div>
-
                     <!-- Single Footer Widget ->
                     <div class="col-12 col-sm-6 col-xl-3">
                         <div class="footer-widget-area mb-100">
@@ -89,13 +81,9 @@ notFoundMessage = "Record not found"
                             </ul>
                         </div>
                     </div-->
-
-
-
                 </div>
             </div>
         </div>
-
         <!-- Copywrite Text -->
         <div class="copywrite-text d-flex align-items-center justify-content-center">
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

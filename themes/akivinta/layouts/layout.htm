@@ -2,68 +2,69 @@ description = "Layout General"
 ==
 <!DOCTYPE html>
 <html lang="en">
-
+description = "Layout General"
+==
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title  -->
-    <title>Akivinta - Experiencied Real Estate Solutions | Home</title>
-
-    <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico"
-    >
-    <script src="https://kit.fontawesome.com/0e0e3660c4.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-
-
-    
-    
-    <!-- Style CSS -->    
-      <link rel="stylesheet" type="text/css" href="{{ [
-            'assets/css/style.css' ,
-            'assets/css/style2.css' 
-         ]|theme }}">
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% if this.page.title %}
+    <title>{{ this.page.title }} - Akivinta</title>
+  {% else %}
+    <title>Akivinta - Experienced Real Estate Solutions</title>
+  {% endif %}
+  <!-- Primary meta -->
+  <meta name="description" content="{{ this.page.meta_description|default('Akivinta - Experienced Real Estate Solutions') }}">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ this.page.title|default('Akivinta') }}">
+  <meta property="og:description" content="{{ this.page.meta_description|default('Akivinta - Experienced Real Estate Solutions') }}">
+  <meta property="og:image" content="{{ this.page.og_image|default('assets/img/core-img/logo-white.png'|theme) }}">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ this.page.title|default('Akivinta') }}">
+  <meta name="twitter:description" content="{{ this.page.meta_description|default('Akivinta - Experienced Real Estate Solutions') }}">
+  <meta name="twitter:image" content="{{ this.page.og_image|default('assets/img/core-img/logo-white.png'|theme) }}">
+  <!-- Favicon -->
+  <link rel="icon" href="{{ 'assets/img/core-img/favicon.ico'|theme }}">
+  <!-- External CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css">
+  <!-- Theme CSS -->
+  <link rel="stylesheet" type="text/css" href="{{ [
+    'assets/css/style.css',
+    'assets/css/style2.css',
+    'assets/css/custom.css'
+  ]|theme }}">
   {% styles %}
-  
-  
-  <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="south-load"></div>
-    </div>
-    
-    
-      <!-- Header -->
-    {% if this.page.title == 'Inicio' %}
-          {% partial 'site/header' %}
-    {% else %}
-          {% partial 'site/header-int' %}
-     {% endif %}
-  
-  
-      
-      
-      
-      {% page %}
-
-
-
-
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="south-load"></div>
+  </div>
+  <!-- Header -->
+  {% if this.page.title == 'Inicio' %}
+    {% partial 'site/header' %}
+  {% else %}
+    {% partial 'site/header-int' %}
+  {% endif %}
+  {% page %}
   <!-- Footer -->
   {% partial 'site/footer' %}
-  
-  
-    <!-- Scripts -->
+  <!-- External JS (deferred where possible) -->
+  <script src="https://kit.fontawesome.com/0e0e3660c4.js" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js" defer></script>
+  <!-- Theme JS -->
   <script type="text/javascript" src="{{ [
     'assets/js/jquery/jquery-2.2.4.min.js',
     'assets/js/popper.min.js',
@@ -73,20 +74,8 @@ description = "Layout General"
     'assets/js/jquery-ui.min.js',
     'assets/js/active.js',
     'assets/js/propiedades.js',
+    'assets/js/custom.js'
   ]|theme }}"></script>
-
   {% scripts %}
-  
-
-
 </body>
-
 </html>
-
-
-  
-  
-
-</body>
-
-</head>

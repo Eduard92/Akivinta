@@ -2,9 +2,7 @@ title = "Inicio"
 url = "/"
 layout = "layout"
 is_hidden = 0
-
 [propiedades]
-
 [builderList ciudadesListas]
 modelClass = "Devapps\RealState\Models\Ciudad"
 scope = "-"
@@ -14,7 +12,6 @@ noRecordsMessage = "No records found"
 detailsPage = "-"
 detailsUrlParameter = "id"
 pageNumber = "{{ :page }}"
-
 [builderList categoriaListas]
 modelClass = "Devapps\RealState\Models\Categoria"
 scope = "-"
@@ -25,13 +22,10 @@ detailsPage = "-"
 detailsUrlParameter = "id"
 pageNumber = "{{ :page }}"
 ==
-<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
-
+<!-- Awesomplete assets are loaded globally in the layout; page only exposes data objects for initialization -->
 <!-- ##### Hero Area Start ##### -->
 {% set ciudades = ciudadesListas.records %}
 {% set categorias = categoriaListas.records %}
-
 <section class="hero-area" style="position: relative;">
   <div class="hero-slides owl-carousel">
     {% for image in sliderHome.images %}
@@ -40,7 +34,6 @@ pageNumber = "{{ :page }}"
       </div>
     {% endfor %}
   </div>
-
   <div class="search-overlay">
     <div class="search-container">
       <div class="logo">A</div>
@@ -50,181 +43,32 @@ pageNumber = "{{ :page }}"
                 <div class="form-group">
                     <input type="hidden" name="ciudad_id" id="ciudad_id" />
                     <input type="hidden" name="categoria_id" id="categoria_id" />
-                    <input name="" id="categoriaAutocomplete" placeholder="Categoría" autocomplete="off" />
-                    <input name="" id="autocomplete" placeholder="Ciudad" autocomplete="off" />
-                    <input name="disponibilidad" id="disponibilidadAutocomplete" placeholder="Disponibilidad" autocomplete="off" />
+                <input name="categoria_label" id="categoriaAutocomplete" placeholder="Categoría" autocomplete="off" aria-label="Categoría" />
+                <input name="ciudad_label" id="autocomplete" placeholder="Ciudad" autocomplete="off" aria-label="Ciudad" />
+                <input name="disponibilidad" id="disponibilidadAutocomplete" placeholder="Disponibilidad" autocomplete="off" aria-label="Disponibilidad" />
                 </div>
                 <button type="submit" class="btn-search">BUSCAR</button>
             </form>
-
     </div>
   </div>
 </section>
-
 <script>
-  var ciudades = [
+  window.ciudades = [
     {% for ciudad in ciudades %}
       { label: "{{ ciudad.ciudad }}", value: {{ ciudad.id }} },
     {% endfor %}
   ];
-
-  var categorias = [
+  window.categorias = [
     {% for categoria in categorias %}
       { label: "{{ categoria.categoria }}", value: {{ categoria.id }} },
     {% endfor %}
   ];
-
-  var disponibilidad = ["Renta", "Venta"];
-
-  var ciudadInput = document.getElementById("autocomplete");
-  var ciudadIdInput = document.getElementById("ciudad_id");
-
-  var categoriaInput = document.getElementById("categoriaAutocomplete");
-  var categoriaIdInput = document.getElementById("categoria_id");
-
-  var disponibilidadInput = document.getElementById("disponibilidadAutocomplete");
-
-  var ciudadAwesomplete = new Awesomplete(ciudadInput, {
-    list: ciudades.map(c => c.label),
-    minChars: 0,
-    filter: Awesomplete.FILTER_CONTAINS,
-    replace: function(text) {
-      this.input.value = text;
-    }
-  });
-
-  var categoriaAwesomplete = new Awesomplete(categoriaInput, {
-    list: categorias.map(c => c.label),
-    minChars: 0,
-    filter: Awesomplete.FILTER_CONTAINS,
-    replace: function(text) {
-      this.input.value = text;
-    }
-  });
-
-  var disponibilidadAwesomplete = new Awesomplete(disponibilidadInput, {
-    list: disponibilidad,
-    minChars: 0,
-    filter: Awesomplete.FILTER_CONTAINS
-  });
-
-  categoriaInput.addEventListener("awesomplete-selectcomplete", function(evt) {
-    var selected = categorias.find(c => c.label === (evt.text.value || evt.text));
-    categoriaIdInput.value = selected ? selected.value : "";
-    ciudadInput.focus();  // foco a ciudad después de categoría
-  });
-
-  categoriaInput.addEventListener("input", function() {
-    categoriaIdInput.value = "";
-  });
-
-  ciudadInput.addEventListener("awesomplete-selectcomplete", function(evt) {
-    var selected = ciudades.find(c => c.label === (evt.text.value || evt.text));
-    ciudadIdInput.value = selected ? selected.value : "";
-    disponibilidadInput.focus();  // foco a disponibilidad después de ciudad
-  });
-
-  ciudadInput.addEventListener("input", function() {
-    ciudadIdInput.value = "";
-  });
-
-  disponibilidadInput.addEventListener("awesomplete-selectcomplete", function(evt) {
-    // Quitar foco al seleccionar disponibilidad
-    disponibilidadInput.blur();
-  });
-
-  disponibilidadInput.addEventListener("input", function() {
-    // Aquí puedes manejar reset si quieres
-  });
-
-  function showFullListOnFocus(input, awesompleteInstance) {
-    input.addEventListener("focus", function () {
-      const currentValue = input.value;
-      input.value = ""; 
-      awesompleteInstance.evaluate(); 
-      input.value = currentValue; 
-    });
-  }
-
-  showFullListOnFocus(ciudadInput, ciudadAwesomplete);
-  showFullListOnFocus(categoriaInput, categoriaAwesomplete);
-  showFullListOnFocus(disponibilidadInput, disponibilidadAwesomplete);
-
+  window.disponibilidad = ["Renta","Venta"];
 </script>
-
-<style>
-/*header-area nunca quitarlo*/
-.header-area {
-    position: absolute!important;
-
-}
-
-.main-header-area {
-
-    background-color: #09344a7a;
-    }
-.hero-slides .single-hero-slide {
-height: 100vh!important; 
-overflow: hidden!important; 
-}
-.hero-slides .single-hero-slide img {
-  width: 100% !important; 
-  height: 100% !important; 
-  object-fit: cover !important; 
-}
-
-.main-header-area .classy-nav-container {
-background-color: transparent !important;
-}
-.hero-area .owl-dot {
-width: 10px!important;
-height: 10px!important;
-
-}
-
-.owl-nav {
-display: none !important;
-}
-
-
-.owl-dots {
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  gap: 12px;
-  position: absolute;
-  bottom: 20px;
-  left: 50%; 
-  transform: translateX(-50%); 
-  z-index: 10;
-  padding: 0;
-  margin: 0;
-}
-
-
-.owl-dot {
-width: 0px;
-height: 0px;
-background-color: rgba(255, 255, 255, 0.5);
-border-radius: 50%; 
-cursor: pointer;
-text-indent: -9999px; 
-overflow: hidden;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-transition: background-color 0.3s ease;
-border: none;
-outline: none;
-padding: 0;
-margin: 0;
-}
-
-
-
+<!-- Styles moved to assets/css/custom.css -->
 .owl-dot:hover:not(.active) {
 background-color: rgba(255, 255, 255, 0.8);
 }
-
-
 .search-overlay {
 position: absolute;
 top: 50%;
@@ -232,55 +76,41 @@ left: 50%;
 transform: translate(-50%, -50%);
 z-index: 10;
 width: 100%;
-display: flex;
 justify-content: center;
 align-items: center;
 padding: 20px;
 }
-
 .search-container {
 background-color: rgba(255, 255, 255, 0.9);
 padding: 20px;
 border-radius: 10px;
 text-align: center;
 width: 80%;
-max-width: 800px;
 box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-
 .logo {
 width: 50px;
 height: 50px;
 background-color: #003049;
 color: white;
-font-size: 30px;
 line-height: 50px;
 margin: 0 auto 10px;
 border-radius: 5px;
 }
-
-.search-container h1 {
 margin: 0;
 font-size: 32px;
 letter-spacing: 5px;
 color: #333;
-}
-
 .subtitle {
 margin: 5px 0 30px;
-font-size: 16px;
 color: #666;
 }
-
-.form-group {
 display: flex;
 gap: 10px;
 justify-content: center;
 margin-bottom: 20px;
 flex-wrap: wrap;
     padding: 10px;
-}
-
+<!-- Property styles moved to assets/css/custom.css -->
 .form-group input {
 padding: 10px;
 width: 200px;
@@ -288,12 +118,10 @@ border: 1px solid #333;
 border-radius: 3px;
 font-family: inherit;
 }
-
 .form-group input:focus {
 outline: none;
 border-color: #003049;
 }
-
 .btn-search {
 background-color: #003049;
 color: white;
@@ -303,17 +131,12 @@ font-size: 16px;
 cursor: pointer;
 border-radius: 3px;
 }
-
 .btn-search:hover {
 background-color: #012533;
 }
 </style>
-
     <!-- ##### Hero Area End ##### -->
-    
-    
     <!-- ##### Featured Properties Area Start ##### -->
-
         {% partial 'site/propiedades' %}
     <!-- ##### Featured Properties Area End ##### -->
 <style>
@@ -322,7 +145,6 @@ border: 5px  ;
 border-radius: 10px; 
 overflow: hidden; 
 }
-
 .property-box .footer {
 border-top: 1px solid #efefef;
 background: #09344a;
@@ -330,7 +152,6 @@ line-height: 48px;
 padding: 0 20px;
 font-size: 14px;
 }
-
 .listing-time {
 text-align: center;
 font-size: 12px;
@@ -342,40 +163,32 @@ text-transform: uppercase;
 background: #09344a;
 border-radius: 3px;
 }
-
 </style>
-
 <style>
 .property-box {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
-
 .property-thumbnail img {
     height: 250px;
     object-fit: cover;
     width: 100%;
 }
-
 .property-thumbnail {
     height: 250px;
     overflow: hidden;
 }
-
 .property-content {
     flex-grow: 1;
 }
-
 .col-lg-6 {
     margin-bottom: 20px;
 }
-
 .property-box {
     height: 90%;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border-radius: 10px;
     overflow: hidden;
 }
-
 </style>
