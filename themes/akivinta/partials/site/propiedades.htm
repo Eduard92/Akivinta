@@ -12,12 +12,12 @@
       <div class="swiper-wrapper">
         {% for propiedad in propiedades %}
           <div class="swiper-slide">
-            <a href="/property/{{ propiedad.slug }}" class="d-block text-dark text-decoration-none" aria-label="Ver {{ propiedad.titulo }}">
+            <div class="property-link-wrapper">
               <!-- slide -->
                  <div class="">
                    <div class="property-box" onclick="window.location.href='{{ 'property/' ~ propiedad.slug }}'" style="cursor: pointer;">
                     <div class="property-thumbnail">
-                      <a href="{{ propiedad.slug }}" class="property-img">
+                        <div class="property-img">
                         <div class="listing-badges">
                           <span class="featured" style="display: none;">Featured</span>
                           {% if propiedad.estado %}
@@ -30,7 +30,7 @@
                           </div>
                         {% endif %}
                         <img class="d-block w-100" src="{{ propiedad.portada.path }}" srcset="{{ propiedad.portada.path }} 800w, {{ propiedad.portada.path }} 400w" sizes="(max-width: 600px) 100vw, 33vw" alt="{{ propiedad.titulo|escape }}" loading="lazy" decoding="async">
-                      </a>
+                        </div>
                     </div>
                     <div class="detail">
                       <div class="property-content">
@@ -79,7 +79,7 @@
                     </div>
                   </div>
                 </div>
-            </a>
+            </div>
           </div>
         {% endfor %}
       </div>
