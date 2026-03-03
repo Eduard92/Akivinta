@@ -1,0 +1,287 @@
+title = "property"
+url = "/property/:slug"
+layout = "layout"
+is_hidden = 0
+
+[propiedades]
+==
+{% put scripts%}
+<script type="text/javascript" src="{{'assets/js/propiedades.js'|theme}}"></script>
+
+{% endput%}
+
+
+<style>
+.property-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.property-thumbnail img {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.property-thumbnail {
+    height: 250px;
+    overflow: hidden;
+}
+
+.property-content {
+    flex-grow: 1;
+}
+
+.col-lg-6 {
+    margin-bottom: 20px;
+}
+
+.property-box {
+    height: 90%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+</style>
+
+<div class="properties-details-page content-area-7">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-xs-12">
+                <div class="properties-details-section">
+                    <div id="propertiesDetailsSlider" class="carousel properties-details-sliders slide mb-40">
+                        <!-- Heading properties start -->
+                        <div class="heading-properties-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-left">
+                                        <h1>{{property.nombre}}</h1>
+                                        
+                                        
+                                        <p><i class="fa fa-map-marker"></i>{{property.direccion}} - {{property.ciudad.ciudad}}</p>
+                                    </div>
+                                    
+                                    {%if property.precio > 0 %}
+                                        <div class="pull-right">
+                                            <h3 class="h3-tipografia"><span class="text-right"><i class="fa-solid fa-tag"></i>  ${{property.precio}}</span></h3>
+                                        </div>
+                                    {% endif%}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- main slider carousel items -->
+                       <div class="carousel-inner">
+                            <div class="active item carousel-item" data-slide-number="0">
+                                <a href="{{ property.portada.path }}" class="glightbox" data-gallery="property-gallery">
+                                    <img src="{{ property.portada.path }}" class="img-fluid" alt="slider-properties">
+                                </a>
+                            </div>
+                            {% for image in property.galeria %}
+                                <div class="item carousel-item" data-slide-number="{{ loop.index }}">
+                                    <a href="{{ image.path }}" class="glightbox" data-gallery="property-gallery">
+                                        <img src="{{ image.path }}" class="img-fluid" alt="slider-properties">
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+                        <!-- main slider carousel nav controls -->
+                        <ul class="carousel-indicators smail-properties list-inline nav nav-justified">
+                            <li class="list-inline-item active">
+                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#propertiesDetailsSlider">
+                                    <img src="{{ property.portada.path }}" class="img-fluid" alt="properties-small">
+                                </a>
+                            </li>
+                            {% for image in property.galeria %}
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-{{ loop.index }}" data-slide-to="{{ loop.index }}" data-target="#propertiesDetailsSlider">
+                                        <img src="{{ image.path }}" class="img-fluid" alt="properties-small">
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <!-- main slider carousel items -->
+                    </div>
+                    
+                    <!-- Tabbing box start -->
+                    <div class="tabbing tabbing-box tb-2 mb-40">
+                        <ul class="nav nav-tabs" id="carTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="false">Descripción</a>
+                            </li>
+                           <!--  <li class="nav-item">
+                                <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">Planos de planta</a>
+                            </li>-->
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="three" aria-selected="true">Detalles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="4-tab" data-toggle="tab" href="#4" role="tab" aria-controls="4" aria-selected="true">Video</a>
+                            </li>
+                        </ul>                         
+                        <div class="tab-content" id="carTabContent">
+                            <div class="tab-pane fade" id="one" role="tabpanel" aria-labelledby="one-tab">
+                                <div class="properties-description mb-50">
+                                    <h3 class="heading-2">
+                                        Descripción
+                                    </h3>
+                                    {{property.descripcion|raw}}
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="two-tab">
+                                <div class="floor-plans mb-50">
+                                    <h3 class="heading-2">Planos de planta</h3>
+                                    <table>
+                                        <tbody><tr>
+                                            <td><strong>Tamaño</strong></td>
+                                            <td><strong>Alojamiento</strong></td>
+                                            <td><strong>Baños</strong></td>
+                                            <td><strong>Garajes</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1600</td>
+                                            <td>3</td>
+                                            <td>2</td>
+                                            <td>1</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <img src="img/floor-plans.png" alt="floor-plans" class="img-fluid">
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade " id="4" role="tabpanel" aria-labelledby="4-tab">
+                                <div class="inside-properties mb-50">
+                                    <h3 class="heading-2">
+                                        Vídeo de propiedad
+                                    </h3>
+                                    <iframe src="https://www.youtube.com/embed/5e0LxrLSzok" allowfullscreen=""></iframe>
+                                </div>
+                            </div>
+                            
+                            <div class="" id="three" role="tabpanel" aria-labelledby="three-tab">
+                                
+                            </div>
+                        </div>
+                          
+                    </div>
+
+                    <!-- Properties amenities start -->
+                    <div class="properties-amenities mb-40">
+                        <h3 class="heading-2">
+                            Características
+                        </h3>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <ul class="amenities">
+                                    <li style="display: none;">
+                                        <i class="fa-regular fa-id-card"></i>Propiedad Id: {{ property.slug }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-bars-progress"></i>Categoria: {{ (categorias | filter(c => c.id == property.id_categoria) | first).categoria }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-money-check-dollar"></i>Precio de venta: ${{ property.precio }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-people-roof"></i>Recámaras: {{ property.habitaciones }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-bath"></i>Baños: {{ property.banos }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <ul class="amenities">
+                                    <li>
+                                        <i class="fa-solid fa-toilet"></i>Medios baños: {{ property.medio_banos }}
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-car"></i>Estacionamientos: {{ property.cajones_estacionamiento }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-vector-square"></i>Construcción: {{ property.m2_construccion }}m²
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-vector-square"></i>Terreno: {{ property.m2_terreno }}m²
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-road-bridge"></i>Vialidad: {{ property.vialidad }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <ul class="amenities">
+                                    <li>
+                                        <i class="fa-solid fa-calendar-days"></i>Antigüedad: {{ property.antiguedad }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-house-flag"></i>Pisos: {{ property.plantas }}
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bell"></i>Mantenimientio: ${{ property.cuota_mant }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-check"></i>Activo: {{ property.activo }}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-arrow-right-arrow-left"></i>Estado: {{ property.estado }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                  {% partial 'site/sidebar' %}
+                
+            </div>
+            </div>
+            
+            
+
+            
+        </div>
+
+    </div>
+</div>
+
+                                      {% partial 'site/propiedades' %}
+
+
+<style>
+.property-box {
+  border: 5px  ; 
+  border-radius: 10px; 
+  overflow: hidden; 
+}
+
+.property-box .footer {
+    border-top: 1px solid #efefef;
+    background: #09344a;
+    line-height: 48px;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+.listing-time {
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+    padding: 6px 15px 5px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    background: #09344a;
+    border-radius: 3px;
+}
+
+</style>

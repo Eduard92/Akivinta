@@ -1,0 +1,92 @@
+description = "Layout General"
+==
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Akivinta - Experiencied Real Estate Solutions | Home</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico"
+    >
+    <script src="https://kit.fontawesome.com/0e0e3660c4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+
+    
+    
+    <!-- Style CSS -->    
+      <link rel="stylesheet" type="text/css" href="{{ [
+            'assets/css/style.css' ,
+            'assets/css/style2.css' 
+         ]|theme }}">
+  {% styles %}
+  
+  
+  <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="south-load"></div>
+    </div>
+    
+    
+      <!-- Header -->
+    {% if this.page.title == 'Inicio' %}
+          {% partial 'site/header' %}
+    {% else %}
+          {% partial 'site/header-int' %}
+     {% endif %}
+  
+  
+      
+      
+      
+      {% page %}
+
+
+
+
+  <!-- Footer -->
+  {% partial 'site/footer' %}
+  
+  
+    <!-- Scripts -->
+  <script type="text/javascript" src="{{ [
+    'assets/js/jquery/jquery-2.2.4.min.js',
+    'assets/js/popper.min.js',
+    'assets/js/bootstrap.min.js',
+    'assets/js/plugins.js',
+    'assets/js/classy-nav.min.js',
+    'assets/js/jquery-ui.min.js',
+    'assets/js/active.js',
+    'assets/js/propiedades.js',
+  ]|theme }}"></script>
+
+  {% scripts %}
+  
+
+
+</body>
+
+</html>
+
+
+  
+  
+
+</body>
+
+</head>

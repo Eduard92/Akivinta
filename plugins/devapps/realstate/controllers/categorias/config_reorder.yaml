@@ -1,0 +1,4 @@
+title: Categorias
+modelClass: Devapps\RealState\Models\Categoria
+toolbar:
+    buttons: reorder_toolbar

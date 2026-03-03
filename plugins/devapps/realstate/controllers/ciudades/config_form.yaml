@@ -1,0 +1,10 @@
+name: Ciudades
+form: $/devapps/realstate/models/ciudad/fields.yaml
+modelClass: Devapps\RealState\Models\Ciudad
+defaultRedirect: devapps/realstate/ciudades
+create:
+    redirect: 'devapps/realstate/ciudades/update/:id'
+    redirectClose: devapps/realstate/ciudades
+update:
+    redirect: devapps/realstate/ciudades
+    redirectClose: devapps/realstate/ciudades

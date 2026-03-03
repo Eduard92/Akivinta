@@ -1,0 +1,10 @@
+name: Empresa
+form: $/devapps/realstate/models/company/fields.yaml
+modelClass: Devapps\RealState\Models\Company
+defaultRedirect: devapps/realstate/empresa
+create:
+    redirect: 'devapps/realstate/empresa/update/:id'
+    redirectClose: devapps/realstate/empresa
+update:
+    redirect: devapps/realstate/empresa
+    redirectClose: devapps/realstate/empresa

@@ -1,0 +1,13 @@
+fields:
+    ciudad:
+        label: Ciudad
+        span: auto
+        required: 1
+        type: text
+    pais:
+        label: Pais
+        nameFrom: pais
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation

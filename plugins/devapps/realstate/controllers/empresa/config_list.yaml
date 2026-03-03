@@ -1,0 +1,12 @@
+list: $/devapps/realstate/models/company/columns.yaml
+modelClass: Devapps\RealState\Models\Company
+title: Empresa
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'devapps/realstate/empresa/update/:id'

@@ -1,0 +1,635 @@
+title = "busqueda"
+url = "/busqueda"
+layout = "layout"
+is_hidden = 0
+
+[propiedades]
+
+[builderList ciudadesListas]
+modelClass = "Devapps\RealState\Models\Ciudad"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "id_pais"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+
+[builderList categoriaListas]
+modelClass = "Devapps\RealState\Models\Categoria"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "id"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
+<!-- CSS de GLightbox -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+<!-- JS de GLightbox -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+{% set categoria = get('categoria') %}
+{% set ciudad = get('ciudad') %}
+{% set disponibilidad = get('disponibilidad') %}
+{% set categoria_id = get('categoria_id') %}
+{% set ciudad_id = get('ciudad_id') %}
+{% set ciudades = ciudadesListas.records %}
+{% set categorias = categoriaListas.records %}
+
+<!--  movil -->
+<section class="hero-area mobile-only">
+  <div class="search-container">
+    <form data-request="onFilterProperties" data-request-update="'propiedades-lista': '#propiedades-lista'" data-request-loading>
+      
+      <div class="form-group">
+        <input type="text" name="nombre" id="buscar_general_mobile" placeholder="Buscar" autocomplete="off" style="width: 100% !important;" />
+      </div>
+
+      <div class="form-group" id="extraFilters" style="display: none;">
+        <input type="hidden" name="ciudad_id" id="ciudad_id_mobile" />
+        <input type="hidden" name="categoria_id" id="categoria_id_mobile" />
+
+        <div style="margin-bottom: 0.5rem;">
+          <input name="" id="categoriaAutocomplete_mobile" placeholder="Categoría" autocomplete="off" style="width: 100%;" />
+        </div>
+
+        <div style="display: flex; gap: 4%; justify-content: space-between;">
+          <input name="" id="autocomplete_mobile" placeholder="Ciudad" autocomplete="off" style="width: 100%;" />
+          <input name="disponibilidad" id="disponibilidadAutocomplete_mobile" placeholder="Disponibilidad" autocomplete="off" style="width: 100%;" />
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="form-group" style="margin-top: 0.5rem;">
+        <button type="button" id="toggleFilters" style="background: none; border: none; font-size: 1.2rem; margin-right: 1rem;" aria-label="Mostrar filtros">
+          <i class="fa-solid fa-arrow-down-wide-short"></i> Más filtros 
+        </button>
+
+        <button type="submit" class="btn-search">BUSCAR</button>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+
+
+
+<script>
+  document.getElementById('toggleFilters').addEventListener('click', function () {
+    const extraFilters = document.getElementById('extraFilters');
+    const isHidden = extraFilters.style.display === 'none';
+    extraFilters.style.display = isHidden ? 'block' : 'none';
+    this.innerHTML = isHidden 
+      ? '<i class="fa-solid fa-arrow-up-wide-short"></i> Ocultar filtros' 
+      : '<i class="fa-solid fa-arrow-down-wide-short"></i> Más filtros';
+  });
+</script>
+
+<div class="properties-section-body content-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <h1 id="tituloBusqueda" style="margin: 0; padding-bottom: 40px;">
+                  {% set totalSeleccionados = (categoria ? 1 : 0) + (ciudad ? 1 : 0) + (disponibilidad ? 1 : 0) %}
+                
+                  {% if totalSeleccionados == 0 %}
+                    Resultados
+                
+                  {% elseif totalSeleccionados == 1 %}
+                    Propiedades en
+                    {% if categoria %}
+                      {{ categoria }}
+                    {% elseif ciudad %}
+                      {{ ciudad }}
+                    {% else %}
+                      {{ disponibilidad }}
+                    {% endif %}
+                
+                  {% elseif totalSeleccionados == 2 %}
+                    {% if categoria and ciudad %}
+                      {{ categoria }} en {{ ciudad }}
+                    {% elseif categoria and disponibilidad %}
+                      {{ categoria }} en {{ disponibilidad }}
+                    {% else %}
+                      {{ ciudad }} en {{ disponibilidad }}
+                    {% endif %}
+                
+                  {% else %}
+                    {{ categoria }} de {{ ciudad }} en {{ disponibilidad }}
+                
+                  {% endif %}
+                </h1>
+
+                <!-- Option bar start -->
+                <div class="option-bar" style="display: none;">
+                    <div class="float-left">
+                        <h4>
+                            <span class="heading-icon">
+                                <i class="fa fa-th-large"></i>
+                            </span>
+                            <span class="title-name">Propiedades</span>
+                        </h4>
+                    </div>
+                    <div class="float-right cod-pad">
+                        <div class="sorting-options">
+                            <select class="sorting">
+                                <option>Nuevo a viejo</option>
+                                <option>Viejo a Nuevo</option>
+                                <option>Propiedades (de mayor a menor)</option>
+                                <option>Propiedades (de menor a mayor)</option>
+                            </select>
+                            <a href="properties-list-rightside.html" class="change-view-btn"><i class="fa fa-th-list"></i></a>
+                            <a href="properties-grid-rightside.html" class="change-view-btn active-view-btn"><i class="fa fa-th-large"></i></a>
+                        </div>
+                    </div>
+                </div>
+                          
+                <!-- Property section start -->
+                <div class="row property-section">
+                    {% if propiedades and propiedades|length > 0 %}
+                        {% for propiedad in propiedades %}
+                            {% if propiedad.activo %}
+                                <div class="col-lg-4">
+                                    <div class="property-box"  style="cursor: pointer;">
+                                        <div class="property-thumbnail" style="position: relative;">
+                                            <a href="{{ propiedad.portada.path }}" class="glightbox property-img full-link" data-gallery="propiedades"></a>
+                                        
+                                            <div class="listing-badges">
+                                                <span class="featured" style="display: none;">Featured</span>
+                                                <span class="listing-time">{{ propiedad.estado ?: 'For Sale' }}</span>
+                                            </div>
+                                        
+                                            {% if propiedad.precio is not empty %}
+                                                <div class="price-box">${{ propiedad.precio }}<small>/{{ propiedad.moneda }}</small></div>
+                                            {% endif %}
+                                        
+                                            <img class="d-block w-100" src="{{ propiedad.portada.path }}" alt="properties">
+                                        </div>
+
+                                        <div class="detail" onclick="window.location.href='/property/{{ propiedad.slug }}'">
+                                            <div class="property-content">
+                                                <h1 class="title">
+                                                    <a href="/property/{{ propiedad.slug }}">{{ propiedad.nombre }}</a>
+                                                </h1>
+                                                <p class="location">
+                                                    <i class="fa-solid fa-location-dot"></i>{{ propiedad.direccion }}
+                                                </p>
+                                                <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                                    <div class="new-tag">
+                                                        <i class="fa-solid fa-people-roof"></i> {{ propiedad.habitaciones }}
+                                                    </div>
+                                                    <div class="bathroom">
+                                                        <i class="fa-solid fa-bath"></i> {{ propiedad.banos }}
+                                                    </div>
+                                                    <div class="garage">
+                                                        <i class="fa fa-car"></i> {{ propiedad.cajones_estacionamiento }}
+                                                    </div>
+                                                    <div class="space">
+                                                        <i class="fa-solid fa-vector-square"></i> {{ propiedad.m2_terreno }}m²
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="footer clearfix">
+                                            <div class="text-center">
+                                                <a style="color: white;" href="/property/{{ propiedad.slug }}">
+                                                    <i class="flaticon-time"></i> VER DETALLE
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12">
+                            <div class="no-results text-center p-5" style="background: #f8f9fa; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+                                <div class="">
+                                  <div class="logo">A</div>
+                                  <h1>AKIVINTA</h1>
+                                  <p class="subtitle">No hay propiedades disponibles en esta búsqueda.</p>       
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                
+                <!-- Page navigation start -->
+                <div class="pagination-box hidden-mb-45 text-center" style="display: none;">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+                            </li>
+                            <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="properties-grid-leftside.html">2</a></li>
+                            <li class="page-item"><a class="page-link" href="properties-grid-fullwidth.html">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="properties-grid-fullwidth.html"><i class="fa fa-angle-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+            <!-- escritorio -->
+                <div class="search-container sidebar desktop-only" >
+                  <form data-request="onFilterProperties" data-request-update="'propiedades-lista': '#propiedades-lista'" data-request-loading>
+                    <h3 class="heading text-left">Buscar Propiedades</h3>
+                    <div class="">
+                      <input type="hidden" name="ciudad_id" id="ciudad_id" />
+                      <input type="hidden" name="categoria_id" id="categoria_id" />
+                      <input class="form-control" name="" id="categoriaAutocomplete" placeholder="Categoría" autocomplete="off" />
+                      <input class="form-control" name="" id="autocomplete" placeholder="Ciudad" autocomplete="off" />
+                      <input class="form-control" name="disponibilidad" id="disponibilidadAutocomplete" placeholder="Disponibilidad" autocomplete="off" />
+                      <button type="submit" class="btn btn-md button-theme">BUSCAR</button>
+                    </div>
+                  </form>
+                </div>
+                {% partial 'site/sidebar' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const lightbox = GLightbox({
+            selector: '.glightbox'
+        });
+    });
+</script>
+
+
+<script>
+var ciudades = [
+  {% for ciudad in ciudades %}
+    { label: "{{ ciudad.ciudad }}", value: {{ ciudad.id }} },
+  {% endfor %}
+];
+
+var categorias = [
+  {% for categoria in categorias %}
+    { label: "{{ categoria.categoria }}", value: {{ categoria.id }} },
+  {% endfor %}
+];
+
+var disponibilidad = ["Renta", "Venta"];
+
+function setupAutocomplete(inputId, hiddenInputId, dataList, onSelectCallback) {
+  var input = document.getElementById(inputId);
+  var hiddenInput = document.getElementById(hiddenInputId);
+
+  if (!input) return;  
+
+  var awesomplete = new Awesomplete(input, {
+    list: dataList.map(item => typeof item === 'string' ? item : item.label),
+    minChars: 0,
+    filter: Awesomplete.FILTER_CONTAINS,
+    replace: function(text) {
+      this.input.value = text;
+    }
+  });
+
+  input.addEventListener("awesomplete-selectcomplete", function(evt) {
+    if (typeof dataList[0] === 'string') {
+      hiddenInput.value = evt.text.value || evt.text;
+    } else {
+      var selected = dataList.find(c => c.label === (evt.text.value || evt.text));
+      hiddenInput.value = selected ? selected.value : "";
+    }
+
+    if (typeof onSelectCallback === "function") {
+      onSelectCallback(input);
+    }
+  });
+
+  input.addEventListener("input", function() {
+    hiddenInput.value = "";
+  });
+
+  input.addEventListener("focus", function () {
+    const currentValue = input.value;
+    input.value = "";
+    awesomplete.evaluate();
+    input.value = currentValue;
+  });
+}
+
+setupAutocomplete("categoriaAutocomplete", "categoria_id", categorias, function() {
+  document.getElementById("autocomplete").focus();
+});
+
+setupAutocomplete("autocomplete", "ciudad_id", ciudades, function() {
+  document.getElementById("disponibilidadAutocomplete").focus();
+});
+
+setupAutocomplete("disponibilidadAutocomplete", "disponibilidadAutocomplete", disponibilidad, function(input) {
+  input.blur();  
+});
+
+setupAutocomplete("categoriaAutocomplete_mobile", "categoria_id_mobile", categorias, function() {
+  document.getElementById("autocomplete_mobile").focus();
+});
+
+setupAutocomplete("autocomplete_mobile", "ciudad_id_mobile", ciudades, function() {
+  document.getElementById("disponibilidadAutocomplete_mobile").focus();
+});
+
+setupAutocomplete("disponibilidadAutocomplete_mobile", "disponibilidadAutocomplete_mobile", disponibilidad, function(input) {
+  input.blur();
+});
+</script>
+
+    
+<style>
+
+@media (min-width: 992px) {
+    .col-lg-4 {
+        -ms-flex: 0 0 33.333333%!important;
+        flex: 1 0 34.3333%!important;
+        max-width: 50%!important;
+    }
+}
+
+@media (min-width: 1600px) {
+    .col-lg-4 {
+        -ms-flex: 0 0 33.333333%!important;
+        flex: 5 0 0.3333% !important;
+       
+    }
+}
+
+@media (min-width: 992px) {
+    .col-lg-4 {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 50%; 
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1600px;
+    }
+}
+
+.property-thumbnail {
+    position: relative;
+}
+
+.property-thumbnail .full-link {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    text-decoration: none;
+}
+
+
+.awesomplete>ul {
+border-radius: .3em;
+margin: .2em 0 0;
+background: hsl(0deg 0% 100%) !important;
+background: linear-gradient(to bottom right, #fff, hsl(0deg 0% 100%)) !important;
+border: 1px solid rgba(0, 0, 0, .3);
+box-shadow: .05em .2em .6em rgba(0, 0, 0, .2);
+text-shadow: none;
+}
+@media (max-width: 768px) {
+  .search-container.sidebar.desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+}
+@media (min-width: 769px) {
+  .desktop-only {
+    display: block !important;
+  }
+  .col-lg-4 {
+    display: block !important;
+  }
+
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 992px) {
+    .form-group {
+        margin-bottom: 1rem !important;
+    }
+}
+
+
+.awesomplete {
+    display: block  !important;
+}
+
+.content-area {
+    padding: 80px 0 70px;
+}
+
+@media (max-width: 768px) {
+    .content-area {
+        padding: 0 0;
+    }
+}
+
+
+.col-lg-6 {
+    margin-bottom: 20px;
+}
+
+.property-box {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.property-box:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.property-box .footer {
+    border-top: 1px solid #efefef;
+    background: #09344a;
+    line-height: 48px;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+.property-thumbnail {
+    height: 250px;
+    overflow: hidden;
+}
+
+.property-thumbnail img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.property-content {
+    flex-grow: 1;
+}
+
+.listing-time {
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+    padding: 6px 15px 5px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    background: #09344a;
+    border-radius: 3px;
+}
+
+.owl-nav {
+    display: none !important;
+}
+
+.owl-dots {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+}
+
+.owl-dot {
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    text-indent: -9999px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+.owl-dot:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-area {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0px;
+}
+
+
+
+.search-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 28px;
+    
+    text-align: center;
+    max-width: 1000px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) !important;
+    }
+
+.logo {
+    width: 50px;
+    height: 50px;
+    background-color: #003049;
+    color: white;
+    font-size: 30px;
+    line-height: 50px;
+    margin: 0 auto 10px;
+    border-radius: 5px;
+}
+
+.search-container h1 {
+    margin: 0;
+    font-size: 36px;
+    letter-spacing: 4px;
+    color: #333;
+}
+
+.subtitle {
+    margin: 5px 0 30px;
+    font-size: 18px;
+    color: #666;
+}
+
+.form-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.form-group2 {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: -18px;
+    flex-wrap: wrap;
+}
+
+
+.form-group input {
+    padding: 12px;
+    width: 220px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #003049;
+}
+
+.btn-search {
+    background-color: #003049;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-search:hover {
+    background-color: #012533;
+}
+
+.pull-right {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+</style>

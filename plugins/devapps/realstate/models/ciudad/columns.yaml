@@ -1,0 +1,12 @@
+columns:
+    id:
+        label: Id
+        type: number
+    ciudad:
+        label: Ciudad
+        type: text
+    id_pais:
+        label: Pais
+        type: number
+        select: pais
+        relation: pais

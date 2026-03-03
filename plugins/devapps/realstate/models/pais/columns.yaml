@@ -1,0 +1,10 @@
+columns:
+    id:
+        label: Id
+        type: number
+    codigo:
+        label: Código
+        type: text
+    pais:
+        label: Pais
+        type: text

@@ -1,0 +1,50 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table devapps_realstate_paises'
+    - builder_table_create_devapps_realstate_paises.php
+1.0.3:
+    - 'Created table devapps_realstate_ciudades'
+    - builder_table_create_devapps_realstate_ciudades.php
+1.0.4:
+    - 'Created table devapps_realstate_propiedades_categorias'
+    - builder_table_create_devapps_realstate_propiedades_categorias.php
+1.0.5:
+    - 'Created table devapps_realstate_propiedades'
+    - builder_table_create_devapps_realstate_propiedades.php
+1.0.6:
+    - 'Updated table devapps_realstate_ciudades'
+    - builder_table_update_devapps_realstate_ciudades.php
+1.0.7:
+    - 'Updated table devapps_realstate_propiedades'
+    - builder_table_update_devapps_realstate_propiedades.php
+1.0.8:
+    - 'Updated table devapps_realstate_propiedades'
+    - builder_table_update_devapps_realstate_propiedades_2.php
+1.0.9:
+    - 'Updated table devapps_realstate_propiedades'
+    - builder_table_update_devapps_realstate_propiedades_3.php
+1.0.10:
+    - 'Updated table devapps_realstate_propiedades'
+    - builder_table_update_devapps_realstate_propiedades_4.php
+1.0.11:
+    - 'Updated table devapps_realstate_propiedades'
+    - builder_table_update_devapps_realstate_propiedades_5.php
+1.0.12:
+    - 'Updated table devapps_realstate_propiedades'
+    - builder_table_update_devapps_realstate_propiedades_6.php
+1.0.13:
+    - 'Updated table devapps_realstate_propiedades_categorias'
+    - builder_table_update_devapps_realstate_propiedades_categorias.php
+1.0.14:
+    - 'Updated table devapps_realstate_propiedades'
+    - builder_table_update_devapps_realstate_propiedades_7.php
+1.0.15:
+    - 'Created table devapps_realstate_company'
+    - builder_table_create_devapps_realstate_company.php
+1.0.16:
+    - 'Updated table devapps_realstate_company'
+    - builder_table_update_devapps_realstate_company.php
+1.0.17:
+    - 'Updated table devapps_realstate_company'
+    - builder_table_update_devapps_realstate_company_2.php

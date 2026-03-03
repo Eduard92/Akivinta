@@ -1,0 +1,12 @@
+list: $/devapps/realstate/models/pais/columns.yaml
+modelClass: Devapps\RealState\Models\Pais
+title: Paises
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'devapps/realstate/paises/update/:id'

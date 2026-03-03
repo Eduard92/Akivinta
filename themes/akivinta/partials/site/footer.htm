@@ -1,0 +1,106 @@
+[builderDetails EmpresaRecord]
+modelClass = "Devapps\RealState\Models\Company"
+identifierValue = 1
+modelKeyColumn = "id"
+displayColumn = "nombre"
+notFoundMessage = "Record not found"
+
+[EmpresaData]
+==
+{% set empresa = EmpresaRecord.record %}
+
+
+
+<!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area section-padding-50-0 bg-img gradient-background-overlay">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-2 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <img src="img/bg-img/footer.jpg" alt="">
+                            <div class="footer-logo my-4">
+                                    <img src="{{'assets/img/core-img/logo-white.png'| theme}}" alt="Logo" style="max-width:200px!important">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-8 col-xl-6">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <!--div class="widget-title">
+                                <h6>About Us</h6>
+                            </div-->
+
+                            {{empresa.footer | raw}}
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-2 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <!--div class="widget-title">
+                                <h6>Hours</h6>
+                            </div-->
+                            <!-- Office Hours -->
+                            <div class="weekly-office-hours">
+                                <ul>
+                                    <li class="d-flex align-items-center justify-content-between"><span>Monday - Friday</span> <span>09 AM - 19 PM</span></li>
+                                    <li class="d-flex align-items-center justify-content-between"><span>Saturday</span> <span>09 AM - 14 PM</span></li>
+                                    <li class="d-flex align-items-center justify-content-between"><span>Sunday</span> <span>Closed</span></li>
+                                </ul>
+                            </div>
+                            <!-- Address -->
+                            <div class="address">
+                                <h6><img src="img/icons/phone-call.png" alt=""> +45 677 8993000 223</h6>
+                                <h6><img src="img/icons/envelope.png" alt=""> office@template.com</h6>
+                                <h6><img src="img/icons/location.png" alt=""> Main Str. no 45-46, b3, 56832, Los Angeles, CA</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget ->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title ->
+                            <div class="widget-title">
+                                <h6>Useful Links</h6>
+                            </div>
+                            <!-- Nav ->
+                            <ul class="useful-links-nav d-flex align-items-center">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Services</a></li>
+                                <li><a href="#">Properties</a></li>
+                                <li><a href="#">Listings</a></li>
+                                <li><a href="#">Testimonials</a></li>
+                                <li><a href="#">Properties</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Testimonials</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Elements</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div-->
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Copywrite Text -->
+        <div class="copywrite-text d-flex align-items-center justify-content-center">
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | by Akivinta.mx</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->

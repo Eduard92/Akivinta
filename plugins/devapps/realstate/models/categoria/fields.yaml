@@ -1,0 +1,18 @@
+fields:
+    categoria:
+        label: Categoria
+        span: auto
+        type: text
+    slug:
+        label: Slug
+        span: auto
+        preset:
+            field: categoria
+            type: slug
+        type: text
+    activo:
+        label: Activo
+        span: auto
+        default: 1
+        required: 1
+        type: switch

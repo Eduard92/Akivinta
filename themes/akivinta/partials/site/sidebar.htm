@@ -1,0 +1,127 @@
+==
+<div class="sidebar-right">
+                
+                                   
+                    <!-- Contact 1 start -->
+                    <div class="social-media-box widget clearfix">
+                        <h3 class="heading">Contactanos</h3>
+                        <form action="#" method="GET" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group-dif name">
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Nombre">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group-dif email">
+                                        <input type="email" name="email" id="email" class="form-control" placeholder="Correo">
+                                    </div>
+                                </div>
+  
+                                <div class="col-lg-12">
+                                    <div class="form-group-dif number">
+                                        <input type="text" name="phone" id="phone" class="form-control" placeholder="Numero">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group message">
+                                        <textarea class="form-control-type" name="message" id="message" rows="4"placeholder="">Me interesa mucho esta propiedad y quiero recibir más información. ¡Gracias!
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 text-center">
+                                    <div class="send-btn">
+                                        <button type="submit" class="btn btn-md button-theme">
+                                            <i class="fa-solid fa-envelope"></i> Enviar
+                                        </button>
+                                    </div>
+                                </div><br/><br/>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-md2 button-theme2" onclick="sendWhatsApp()">
+                                            <i class="fa-brands fa-whatsapp"></i> Enviar
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <style>
+                    
+                  .btn-md2 {
+    cursor: pointer;
+    padding: 13px 26px;
+    letter-spacing: 1px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    transition: .5s;
+    border-radius: 3px;
+    border: none;
+    background: green;
+
+    display: block;
+    width: 100%;
+}
+                    </style>
+
+                    <!-- Posts by category start -->
+                    
+                    <div class="posts-by-category widget">
+                        <h3 class="sidebar-title">Categorías</h3>
+                        <div class="s-border"></div>
+                        <div class="m-border"></div>
+                        <ul class="list-unstyled list-cat">
+                            {% for cat in categorias %}
+                                {% set total = propiedades | filter(p => p.id_categoria == cat.id) | length %}
+                                {% if total > 0 %}
+                                    <li>
+                                        <a href="/category/{{ cat.slug }}">
+                                            {{ cat.categoria }}
+                                            <span>({{ total }})</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+
+                    </div>
+                    <!-- Social media box start -->
+                    <div class="social-media-box widget clearfix">
+                        <h3 class="sidebar-title">Social Media</h3>
+                        <div class="s-border"></div>
+                        <div class="m-border"></div>
+                        <ul class="social-list">
+                            <li>
+                                <a href="https://www.facebook.com/AkivintaRealEstate/" class="">
+                                    <i class="fab fa-facebook-f fa-2x" style="color: #3b5998;"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://x.com/akivinta" class="">
+                                    <i class="fa-brands fa-x-twitter fa-2x" style="color: black;"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/akivinta/" class="">
+                                    <i class="fab fa-instagram fa-2x" style="color: #ac2bac;"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://mx.linkedin.com/company/akivinta" class="">
+                                    <i class="fab fa-linkedin-in fa-2x" style="color: #0082ca;"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/" class="">
+                                    <i class="fa-brands fa-youtube fa-2x" style="color: #FF0000;"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>

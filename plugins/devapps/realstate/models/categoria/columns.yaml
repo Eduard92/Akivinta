@@ -1,0 +1,11 @@
+columns:
+    id:
+        label: id
+        type: number
+    categoria:
+        label: Categoria
+        type: text
+    activo:
+        label: activo
+        type: text
+

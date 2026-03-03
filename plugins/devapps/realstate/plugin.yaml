@@ -1,0 +1,51 @@
+plugin:
+    name: 'devapps.realstate::lang.plugin.name'
+    description: 'devapps.realstate::lang.plugin.description'
+    author: devApps
+    icon: oc-icon-building
+    homepage: ''
+permissions:
+    admin_pais:
+        tab: admin_pais
+        label: 'Administrar Países'
+    admin_ciudad:
+        tab: admin_ciudad
+        label: 'Administrar Ciudades'
+    admin_categorias:
+        tab: admin_categorias
+        label: 'Administrar Categorías '
+    admin_propiedades:
+        tab: admin_propiedades
+        label: 'Administrar Propiedades '
+    admin_company:
+        tab: admin_company
+        label: 'Administrar Datos de la Empresa'
+navigation:
+    main-menu-akivinta:
+        label: Paises
+        url: devapps/realstate/Paises
+        icon: icon-building
+        iconSvg: plugins/devapps/realstate/assets/location.svg
+        permissions:
+            - admin_pais
+    main-menu-ciudad:
+        label: Ciudades
+        url: devapps/realstate/Ciudades
+        icon: icon-location-arrow
+        iconSvg: plugins/devapps/realstate/assets/city.svg
+    main-menu-propiedades:
+        label: Propiedades
+        url: devapps/realstate/Propiedades
+        iconSvg: plugins/devapps/realstate/assets/propiedades.svg
+        icon: icon-location-arrow
+    main-menu-categorias:
+        label: Categorias
+        url: devapps/realstate/Categorias
+        icon: icon-location-arrow
+        iconSvg: plugins/devapps/realstate/assets/catalog.svg
+    main-menu-company:
+        label: Empresa
+        url: devapps/realstate/Empresa
+        icon: icon-building
+        permissions:
+            - admin_company

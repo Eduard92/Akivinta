@@ -1,0 +1,159 @@
+tabs:
+    fields:
+        nombre:
+            label: Nombre
+            span: auto
+            required: 1
+            type: text
+            tab: General
+        slug:
+            label: Slug
+            span: auto
+            required: 1
+            defaultFrom: nombre
+            preset:
+                field: nombre
+                type: slug
+            type: text
+            tab: General
+        direccion:
+            label: Direccion
+            span: full
+            hidden: 0
+            required: 1
+            type: text
+            tab: General
+        precio:
+            label: Precio
+            span: auto
+            type: number
+            tab: General
+        moneda:
+            label: Moneda
+            options:
+                MXN: MXN
+                USD: USD
+                EUR: EUR
+                JPY: JPY
+                GBP: GBP
+                AUD: AUD
+                CAD: CAD
+                CHF: CHF
+                CNH: CNH
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: General
+        estado:
+            label: 'Disponible para:'
+            options:
+                Venta: Venta
+                Renta: Renta
+            span: auto
+            default: ''
+            required: 1
+            type: balloon-selector
+            tab: General
+        activo:
+            label: Activo
+            span: auto
+            default: 1
+            required: 1
+            type: switch
+            tab: General
+        portada:
+            label: Portada
+            mode: image
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            maxFiles: '1'
+            span: auto
+            required: 1
+            type: fileupload
+            tab: General
+        galeria:
+            label: Galeria
+            mode: image
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: auto
+            required: 1
+            type: fileupload
+            tab: General
+        descripcion:
+            label: descripcion
+            size: ''
+            span: auto
+            type: richeditor
+            tab: Página
+        ciudad:
+            label: Ciudad
+            nameFrom: ciudad
+            descriptionFrom: description
+            select: ciudad
+            span: auto
+            type: relation
+            tab: Detalles
+        categoria:
+            label: Categoria
+            nameFrom: categoria
+            descriptionFrom: description
+            span: auto
+            cssClass: ''
+            required: 1
+            type: relation
+            tab: Detalles
+        antiguedad:
+            label: Antigüedad
+            span: auto
+            type: number
+            tab: Detalles
+        plantas:
+            label: Niveles
+            span: auto
+            type: number
+            tab: Detalles
+        habitaciones:
+            label: Habitaciones
+            span: auto
+            type: number
+            tab: Detalles
+        banos:
+            label: Baños
+            span: auto
+            type: number
+            tab: Detalles
+        medio_banos:
+            label: 'Medio Baño'
+            span: auto
+            type: number
+            tab: Detalles
+        m2_terreno:
+            label: 'M2 de Terreno'
+            span: auto
+            type: number
+            tab: Detalles
+        m2_construccion:
+            label: 'M2 de Construcción'
+            span: auto
+            type: number
+            tab: Detalles
+        cuota_mant:
+            label: 'Cuota de Mantenimiento'
+            span: auto
+            type: number
+            tab: Detalles
+        vialidad:
+            label: Vialidad
+            span: auto
+            type: text
+            tab: Detalles
+        cajones_estacionamiento:
+            label: Estacionamientos
+            span: auto
+            type: number
+            tab: Detalles

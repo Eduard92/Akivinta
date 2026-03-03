@@ -1,0 +1,10 @@
+name: Categorias
+form: $/devapps/realstate/models/categoria/fields.yaml
+modelClass: Devapps\RealState\Models\Categoria
+defaultRedirect: devapps/realstate/categorias
+create:
+    redirect: 'devapps/realstate/categorias/update/:id'
+    redirectClose: devapps/realstate/categorias
+update:
+    redirect: devapps/realstate/categorias
+    redirectClose: devapps/realstate/categorias

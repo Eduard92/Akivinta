@@ -1,0 +1,65 @@
+columns:
+    id:
+        label: id
+        type: number
+    activo:
+        label: activo
+        type: text
+    banos:
+        label: Baños
+        type: number
+    cajones_estacionamiento:
+        label: 'Cajones de Estacionamiento'
+        type: number
+    caracteristicas:
+        label: Caracteristicas
+        type: text
+    created_at:
+        label: Creado
+        type: datetime
+    cuota_mant:
+        label: 'Cuota de Mantenimiento'
+        type: number
+    direccion:
+        label: Direccion
+        type: text
+    estado:
+        label: Status/Disponibilidad
+        type: text
+    habitaciones:
+        label: habitaciones
+        type: number
+    id_categoria:
+        label: Categoria
+        type: number
+        select: categoria
+        relation: categoria
+    id_ciudad:
+        label: Ciudad
+        type: number
+        select: ciudad
+        relation: ciudad
+    m2_construccion:
+        label: 'M2 de Construccion'
+        type: text
+    m2_terreno:
+        label: 'M2 de Terreno'
+        type: text
+    medio_banos:
+        label: 'Medio Baños'
+        type: number
+    nombre:
+        label: Nombre
+        type: text
+    pagina:
+        label: 'Contenido de Pagina'
+        type: text
+    plantas:
+        label: Plantas
+        type: number
+    precio:
+        label: 'Precio / Renta'
+        type: text
+    vialidad:
+        label: Vialidad
+        type: text

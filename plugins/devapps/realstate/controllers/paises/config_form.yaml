@@ -1,0 +1,10 @@
+name: Paises
+form: $/devapps/realstate/models/pais/fields.yaml
+modelClass: Devapps\RealState\Models\Pais
+defaultRedirect: devapps/realstate/paises
+create:
+    redirect: 'devapps/realstate/paises/update/:id'
+    redirectClose: devapps/realstate/paises
+update:
+    redirect: devapps/realstate/paises
+    redirectClose: devapps/realstate/paises

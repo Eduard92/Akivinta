@@ -1,0 +1,54 @@
+fields:
+    nombre:
+        label: Nombre
+        span: auto
+        type: text
+    direccion:
+        label: Direccion
+        size: tiny
+        span: auto
+        type: textarea
+    telefono:
+        label: Telefono
+        span: auto
+        type: text
+    whatsapp:
+        label: Whatsapp
+        span: auto
+        type: text
+    ' contacto':
+        label: ' Email'
+        span: auto
+        type: text
+    facebook:
+        label: Facebook
+        span: auto
+        type: text
+    ' instagram':
+        label: Instagram
+        span: auto
+        type: text
+    maps:
+        label: Maps
+        span: auto
+        type: text
+    slogan:
+        label: Slogan
+        size: tiny
+        span: auto
+        type: textarea
+    mision:
+        label: Mision
+        size: large
+        span: full
+        type: richeditor
+    vision:
+        label: Vision
+        size: large
+        span: full
+        type: richeditor
+    footer:
+        label: Footer
+        size: large
+        span: full
+        type: richeditor

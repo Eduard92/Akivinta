@@ -1,0 +1,10 @@
+name: Propiedades
+form: $/devapps/realstate/models/propiedad/fields.yaml
+modelClass: Devapps\RealState\Models\Propiedad
+defaultRedirect: devapps/realstate/propiedades
+create:
+    redirect: 'devapps/realstate/propiedades/update/:id'
+    redirectClose: devapps/realstate/propiedades
+update:
+    redirect: devapps/realstate/propiedades
+    redirectClose: devapps/realstate/propiedades
